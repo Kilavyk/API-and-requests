@@ -1,7 +1,7 @@
 from src.api import HeadHunterAPI
-from src.vacancy import Vacancy
 from src.saver import JSONSaver
-from src.utils import filter_vacancies, sort_vacancies, get_top_vacancies, print_vacancies, filter_by_salary
+from src.utils import filter_by_salary, filter_vacancies, get_top_vacancies, print_vacancies, sort_vacancies
+from src.vacancy import Vacancy
 
 
 def user_interaction():

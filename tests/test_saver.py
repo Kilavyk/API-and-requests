@@ -1,5 +1,7 @@
-import pytest
 import json
+
+import pytest
+
 from src.saver import JSONSaver
 
 

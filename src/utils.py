@@ -22,13 +22,16 @@ def filter_vacancies(vacancies: list[Vacancy], keywords: list[str]) -> list[Vaca
 
     return filtered_vacancies
 
+
 def sort_vacancies(vacancies: list[Vacancy]) -> list[Vacancy]:
     """Сортировать вакансии по зарплате."""
     return sorted(vacancies, reverse=True)
 
+
 def get_top_vacancies(vacancies: list[Vacancy], top_n: int) -> list[Vacancy]:
     """Вернуть топ N вакансий."""
     return vacancies[:top_n]
+
 
 def print_vacancies(vacancies: list[Vacancy]) -> None:
     """Формируем и выводим список вакансий."""
@@ -41,10 +44,11 @@ def print_vacancies(vacancies: list[Vacancy]) -> None:
             f"{'-' * 50}"
         )
 
+
 def filter_by_salary(vacancies: list[Vacancy], salary_range: str) -> list[Vacancy]:
     """Фильтрует вакансии по диапазону зарплат. Формат: '100000-150000'"""
     try:
-        min_s, max_s = map(int, salary_range.split('-'))
+        min_s, max_s = map(int, salary_range.split("-"))
         return [v for v in vacancies if min_s <= v.salary <= max_s]
     except (ValueError, AttributeError):
         return vacancies  # Если ввод некорректен, возвращаем все вакансии

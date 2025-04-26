@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+
 import requests
 
 
@@ -14,14 +15,14 @@ class HeadHunterAPI(JobPlatformAPI):
     """Класс для работы с API hh.ru."""
 
     def __init__(self):
-        self.url = 'https://api.hh.ru/vacancies'
-        self.headers = {'User-Agent': 'HH-User-Agent'}
+        self.url = "https://api.hh.ru/vacancies"
+        self.headers = {"User-Agent": "HH-User-Agent"}
         self.params = {
-            'text': '',
-            'search_field': 'name',
-            'page': 0,
-            'per_page': 100,
-            'area': 113  # Код России в hh.ru
+            "text": "",
+            "search_field": "name",
+            "page": 0,
+            "per_page": 100,
+            "area": 113,  # Код России в hh.ru
         }
 
     def _connect_to_api(self) -> requests.Response:
@@ -33,19 +34,19 @@ class HeadHunterAPI(JobPlatformAPI):
 
     def get_vacancies(self, keyword: str) -> list[dict]:
         """Получить вакансии по ключевому слову."""
-        self.params['text'] = keyword
-        self.params['page'] = 0  # Сброс номера страницы
+        self.params["text"] = keyword
+        self.params["page"] = 0  # Сброс номера страницы
         vacancies = []
 
-        while self.params['page'] < 5:  # Количество страниц для поиска, максимум 20
+        while self.params["page"] < 5:  # Количество страниц для поиска, максимум 20
             response = self._connect_to_api()
             data = response.json()
-            items = data.get('items', [])
+            items = data.get("items", [])
             vacancies.extend(items)
 
             if not items:  # Если страница пустая, прерываем цикл
                 break
 
-            self.params['page'] += 1
+            self.params["page"] += 1
 
         return vacancies
